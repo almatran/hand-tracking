@@ -44,7 +44,7 @@ while True:
             for id,lm in enumerate(handlandmark.landmark): #adding counter and returning it
                 # Get finger joint points
                 h,w,_ = img.shape
-                cx,cy = int(lm.x*w),int(lm.y*h)
+                cx,cy = int(lm.x * w),int(lm.y * h)
                 lmList.append([id,cx,cy]) #adding to the empty list 'lmList'
             mpDraw.draw_landmarks(img,handlandmark,mpHands.HAND_CONNECTIONS)
     
@@ -58,7 +58,7 @@ while True:
         cv2.circle(img,(x2,y2),13,(255,0,0),cv2.FILLED) #image #fingers #radius #rgb
         cv2.line(img,(x1,y1),(x2,y2),(255,0,0),3)  #create a line b/w tips of index finger and thumb
  
-        length = hypot(x2-x1,y2-y1) #distance b/w tips using hypotenuse
+        length = hypot(x2-x1,y2-y1) * 1.5 #distance b/w tips using hypotenuse
  # from numpy we find our length,by converting hand range in terms of volume range ie b/w -63.5 to 0
         vol = np.interp(length,[30,350],[volMin,volMax]) 
         volbar=np.interp(length,[30,350],[400,150])
@@ -75,7 +75,7 @@ while True:
         cv2.rectangle(img,(50,int(volbar)),(85,400),(0,0,255),cv2.FILLED)
         cv2.putText(img,f"{int(volper)}%",(10,40),cv2.FONT_ITALIC,1,(0, 255, 98),3)
         #tell the volume percentage ,location,font of text,length,rgb color,thickness
-    cv2.imshow('Image',img) #Show the video 
+    cv2.imshow('Output',img) #Show the video 
     if cv2.waitKey(1) & 0xff==ord(' '): #By using spacebar delay will stop
         break
         
